@@ -8,22 +8,22 @@ borderStyle = openpyxl.styles.Side(style = "thin")
 import time
 start = time.time()
 
-#ON PRELEVE LE FICHIER DONT ON A BESOIN
+# ON PRELEVE LE FICHIER DONT ON A BESOIN
 ecriture = pd.read_excel("ECRITURE3.xlsx", "ECR")
-#ON VA MAINTENANT CREER NOTRE FICHIER EXCEL
+# ON VA MAINTENANT CREER NOTRE FICHIER EXCEL
 file = 'resultat.xlsx'
 writer = pd.ExcelWriter(file, engine='xlsxwriter')
 ecriture.to_excel(writer, sheet_name='compte à compte', index=False)
 writer.save()
 
-#ON AJOUTE A NOTRE FICHIER UN SECOND ONGLET
+# ON AJOUTE A NOTRE FICHIER UN SECOND ONGLET
 file = "resultat.xlsx"
 wb = openpyxl.load_workbook(filename=file)
 ws = wb['compte à compte']
 ws1 = wb.create_sheet("compte a compte 2")
 ws1.title = "compte a compte 2"
 
-#ON COPIE COLLE LA PREMIER LIGNE DU ONGLET 1 AU 2
+# ON COPIE COLLE LA PREMIER LIGNE DU ONGLET 1 AU 2
 for i in "ABCDEFGHIJKLMNOPQRSTUVWXY" :
     ws1[f"{i}1"].value = ws[f"{i}1"].value
 ws1["Z1"].value = "ANNEE"
